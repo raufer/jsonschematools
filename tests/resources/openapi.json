@@ -1,0 +1,4940 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/token": {
+      "post": {
+        "summary": "Login For Access Token",
+        "operationId": "login_for_access_token_token_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me/": {
+      "get": {
+        "summary": "Read Users Me",
+        "operationId": "read_users_me_users_me__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/users/me/items/": {
+      "get": {
+        "summary": "Read Own Items",
+        "operationId": "read_own_items_users_me_items__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Read Root",
+        "operationId": "read_root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/processes/": {
+      "get": {
+        "tags": [
+          "processes"
+        ],
+        "summary": "Get All",
+        "operationId": "get_all_processes__get",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Process-Output"
+                  },
+                  "title": "Response Get All Processes  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "processes"
+        ],
+        "summary": "Create Item",
+        "operationId": "create_item_processes__post",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Process-Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Process-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/processes/search": {
+      "post": {
+        "tags": [
+          "processes"
+        ],
+        "summary": "Search",
+        "operationId": "search_processes_search_post",
+        "parameters": [
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "page_size"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "offset"
+            }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "title": "Filter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Process-Output"
+                  },
+                  "title": "Response Search Processes Search Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/processes/test": {
+      "get": {
+        "tags": [
+          "processes"
+        ],
+        "summary": "Get Test",
+        "operationId": "get_test_processes_test_get",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Test Processes Test Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/processes/{id}": {
+      "put": {
+        "tags": [
+          "processes"
+        ],
+        "summary": "Update Item",
+        "operationId": "update_item_processes__id__put",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Process-Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Process-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "processes"
+        ],
+        "summary": "Delete Item",
+        "operationId": "delete_item_processes__id__delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/processes/catalogue/": {
+      "get": {
+        "tags": [
+          "processes"
+        ],
+        "summary": "Get Catalogue",
+        "operationId": "get_catalogue_processes_catalogue__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Catalogue Processes Catalogue  Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/processes/sample": {
+      "get": {
+        "tags": [
+          "processes"
+        ],
+        "summary": "Get Sample",
+        "operationId": "get_sample_processes_sample_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Response Get Sample Processes Sample Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/assets/localfile": {
+      "get": {
+        "tags": [
+          "assets"
+        ],
+        "summary": "Get Local File",
+        "operationId": "get_local_file_assets_localfile_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filepath",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Filepath",
+              "description": "The path to the file to download"
+            },
+            "description": "The path to the file to download"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/assets/sample": {
+      "get": {
+        "tags": [
+          "assets"
+        ],
+        "summary": "Get Sample",
+        "operationId": "get_sample_assets_sample_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/assets/files": {
+      "get": {
+        "tags": [
+          "assets"
+        ],
+        "summary": "Get File",
+        "operationId": "get_file_assets_files_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filepath",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Filepath",
+              "description": "The path to the file to download"
+            },
+            "description": "The path to the file to download"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/query": {
+      "post": {
+        "tags": [
+          "chat"
+        ],
+        "summary": "Query",
+        "operationId": "query_chat_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Query"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Query Chat Query Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plans/": {
+      "get": {
+        "tags": [
+          "plans"
+        ],
+        "summary": "Get All",
+        "operationId": "get_all_plans__get",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plan-Output"
+                  },
+                  "title": "Response Get All Plans  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "plans"
+        ],
+        "summary": "Create Item",
+        "operationId": "create_item_plans__post",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plan-Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plan-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plans/search": {
+      "post": {
+        "tags": [
+          "plans"
+        ],
+        "summary": "Search",
+        "operationId": "search_plans_search_post",
+        "parameters": [
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "page_size"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "offset"
+            }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "title": "Filter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plan-Output"
+                  },
+                  "title": "Response Search Plans Search Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plans/{id}": {
+      "get": {
+        "tags": [
+          "plans"
+        ],
+        "summary": "Read Item",
+        "operationId": "read_item_plans__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plan-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "plans"
+        ],
+        "summary": "Update Item",
+        "operationId": "update_item_plans__id__put",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plan-Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plan-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "plans"
+        ],
+        "summary": "Delete Item",
+        "operationId": "delete_item_plans__id__delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Collection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CategoryObservation": {
+        "properties": {
+          "category_name": {
+            "type": "string",
+            "title": "Category Name",
+            "description": "Name of the analysis category"
+          },
+          "primary_findings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrimaryFindings"
+              }
+            ],
+            "description": "Primary findings for this category"
+          },
+          "criteria_alignment": {
+            "items": {
+              "$ref": "#/components/schemas/CriteriaAssessment"
+            },
+            "type": "array",
+            "title": "Criteria Alignment",
+            "description": "How observations align with each criterion",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "category_name",
+          "primary_findings"
+        ],
+        "title": "CategoryObservation"
+      },
+      "ConditionalInvestigation-Input": {
+        "properties": {
+          "src": {
+            "type": "string",
+            "title": "Src"
+          },
+          "dst": {
+            "type": "string",
+            "title": "Dst"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONDITIONAL_INVESTIGATION"
+            ],
+            "const": "CONDITIONAL_INVESTIGATION",
+            "title": "Type",
+            "default": "CONDITIONAL_INVESTIGATION"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ConditionalInvestigationData-Input"
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EdgeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "src",
+          "dst",
+          "data"
+        ],
+        "title": "ConditionalInvestigation"
+      },
+      "ConditionalInvestigation-Output": {
+        "properties": {
+          "src": {
+            "type": "string",
+            "title": "Src"
+          },
+          "dst": {
+            "type": "string",
+            "title": "Dst"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONDITIONAL_INVESTIGATION"
+            ],
+            "const": "CONDITIONAL_INVESTIGATION",
+            "title": "Type",
+            "default": "CONDITIONAL_INVESTIGATION"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ConditionalInvestigationData-Output"
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EdgeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "src",
+          "dst",
+          "data"
+        ],
+        "title": "ConditionalInvestigation"
+      },
+      "ConditionalInvestigationData-Input": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "trigger_conditions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Trigger Conditions",
+            "default": []
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__edges__conditional_investigation__Question"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          },
+          "resolution_criteria": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Resolution Criteria",
+            "default": []
+          },
+          "positive_example": {
+            "type": "string",
+            "title": "Positive Example"
+          },
+          "negative_example": {
+            "type": "string",
+            "title": "Negative Example"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TriggerDecision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "positive_example",
+          "negative_example"
+        ],
+        "title": "ConditionalInvestigationData"
+      },
+      "ConditionalInvestigationData-Output": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "trigger_conditions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Trigger Conditions",
+            "default": []
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__edges__conditional_investigation__Question"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          },
+          "resolution_criteria": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Resolution Criteria",
+            "default": []
+          },
+          "positive_example": {
+            "type": "string",
+            "title": "Positive Example"
+          },
+          "negative_example": {
+            "type": "string",
+            "title": "Negative Example"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TriggerDecision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "positive_example",
+          "negative_example"
+        ],
+        "title": "ConditionalInvestigationData"
+      },
+      "Control": {
+        "properties": {
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instructions"
+          }
+        },
+        "type": "object",
+        "title": "Control"
+      },
+      "CreditReportVisualisation-Input": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CREDIT_REPORT_VISUALISATION"
+            ],
+            "const": "CREDIT_REPORT_VISUALISATION",
+            "title": "Type",
+            "default": "CREDIT_REPORT_VISUALISATION"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreditReportVisualisationData-Input"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "CreditReportVisualisation"
+      },
+      "CreditReportVisualisation-Output": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CREDIT_REPORT_VISUALISATION"
+            ],
+            "const": "CREDIT_REPORT_VISUALISATION",
+            "title": "Type",
+            "default": "CREDIT_REPORT_VISUALISATION"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreditReportVisualisationData-Output"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "CreditReportVisualisation"
+      },
+      "CreditReportVisualisationData-Input": {
+        "properties": {
+          "visualisations": {
+            "items": {
+              "$ref": "#/components/schemas/Visualisation-Input"
+            },
+            "type": "array",
+            "title": "Visualisations",
+            "description": "List of visualisations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "visualisations"
+        ],
+        "title": "CreditReportVisualisationData"
+      },
+      "CreditReportVisualisationData-Output": {
+        "properties": {
+          "visualisations": {
+            "items": {
+              "$ref": "#/components/schemas/Visualisation-Output"
+            },
+            "type": "array",
+            "title": "Visualisations",
+            "description": "List of visualisations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "visualisations"
+        ],
+        "title": "CreditReportVisualisationData"
+      },
+      "CriteriaAssessment": {
+        "properties": {
+          "criterion": {
+            "type": "string",
+            "title": "Criterion",
+            "description": "Name of the criterion being assessed"
+          },
+          "requirement": {
+            "type": "string",
+            "title": "Requirement",
+            "description": "The required threshold or condition"
+          },
+          "actual": {
+            "type": "string",
+            "title": "Actual",
+            "description": "The actual observed value or condition"
+          },
+          "assessment": {
+            "type": "string",
+            "title": "Assessment",
+            "description": "Evaluation of how the actual value compares to the requirement. Be detailed and specific."
+          }
+        },
+        "type": "object",
+        "required": [
+          "criterion",
+          "requirement",
+          "actual",
+          "assessment"
+        ],
+        "title": "CriteriaAssessment"
+      },
+      "Criterion": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "justification": {
+            "type": "string",
+            "title": "Justification"
+          },
+          "measurements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Measurements",
+            "default": []
+          },
+          "thresholds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Thresholds",
+            "default": []
+          },
+          "positive_examples": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Positive Examples",
+            "default": []
+          },
+          "negative_examples": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Negative Examples",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "justification"
+        ],
+        "title": "Criterion"
+      },
+      "DeliberationReport-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DELIBERATION_REPORT"
+            ],
+            "const": "DELIBERATION_REPORT",
+            "title": "Type",
+            "default": "DELIBERATION_REPORT"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Input"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliberationReportData-Input"
+              }
+            ],
+            "description": "The data for the deliberation report.",
+            "default": {
+
+            }
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "DeliberationReport"
+      },
+      "DeliberationReport-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DELIBERATION_REPORT"
+            ],
+            "const": "DELIBERATION_REPORT",
+            "title": "Type",
+            "default": "DELIBERATION_REPORT"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Output"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliberationReportData-Output"
+              }
+            ],
+            "description": "The data for the deliberation report.",
+            "default": {
+
+            }
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "DeliberationReport"
+      },
+      "DeliberationReportData-Input": {
+        "properties": {
+          "summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__deliberation_report__Summary"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The summary report of the analysis."
+          }
+        },
+        "type": "object",
+        "title": "DeliberationReportData"
+      },
+      "DeliberationReportData-Output": {
+        "properties": {
+          "summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__deliberation_report__Summary"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The summary report of the analysis."
+          }
+        },
+        "type": "object",
+        "title": "DeliberationReportData"
+      },
+      "EdgeMetadata": {
+        "properties": {
+          "is_computed": {
+            "type": "boolean",
+            "title": "Is Computed",
+            "default": false
+          },
+          "is_optional": {
+            "type": "boolean",
+            "title": "Is Optional",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "EdgeMetadata"
+      },
+      "File": {
+        "properties": {
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          },
+          "filepath": {
+            "type": "string",
+            "title": "Filepath"
+          },
+          "extension": {
+            "type": "string",
+            "title": "Extension"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              }
+            ],
+            "default": {
+              "id": "UNKNOWN:UNKNOWN",
+              "type": "UNKNOWN",
+              "subtype": "UNKNOWN",
+              "sections": []
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "filename",
+          "filepath",
+          "extension"
+        ],
+        "title": "File"
+      },
+      "GroundedSummarisation-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "GROUNDED_SUMMARISATION"
+            ],
+            "const": "GROUNDED_SUMMARISATION",
+            "title": "Type",
+            "default": "GROUNDED_SUMMARISATION"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Input"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GroundedSummarisationData-Input"
+              }
+            ],
+            "default": {
+              "criteria": []
+            }
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "GroundedSummarisation"
+      },
+      "GroundedSummarisation-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "GROUNDED_SUMMARISATION"
+            ],
+            "const": "GROUNDED_SUMMARISATION",
+            "title": "Type",
+            "default": "GROUNDED_SUMMARISATION"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Output"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GroundedSummarisationData-Output"
+              }
+            ],
+            "default": {
+              "criteria": []
+            }
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "GroundedSummarisation"
+      },
+      "GroundedSummarisationData-Input": {
+        "properties": {
+          "criteria": {
+            "items": {
+              "$ref": "#/components/schemas/Criterion"
+            },
+            "type": "array",
+            "title": "Criteria",
+            "default": []
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__grounded_summarisation__Summary-Input"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "GroundedSummarisationData"
+      },
+      "GroundedSummarisationData-Output": {
+        "properties": {
+          "criteria": {
+            "items": {
+              "$ref": "#/components/schemas/Criterion"
+            },
+            "type": "array",
+            "title": "Criteria",
+            "default": []
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__grounded_summarisation__Summary-Output"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "GroundedSummarisationData"
+      },
+      "GuidedSummary-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "GUIDED_SUMMARY"
+            ],
+            "const": "GUIDED_SUMMARY",
+            "title": "Type",
+            "default": "GUIDED_SUMMARY"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Input"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GuidedSummaryData"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The data for the guided summary."
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "GuidedSummary"
+      },
+      "GuidedSummary-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "GUIDED_SUMMARY"
+            ],
+            "const": "GUIDED_SUMMARY",
+            "title": "Type",
+            "default": "GUIDED_SUMMARY"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Output"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GuidedSummaryData"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The data for the guided summary."
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "GuidedSummary"
+      },
+      "GuidedSummaryData": {
+        "properties": {
+          "guidelines": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SummaryGuidelines"
+              }
+            ],
+            "description": "The guidelines for the summary."
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__guided_summary__Summary"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The summary of the analysis."
+          }
+        },
+        "type": "object",
+        "required": [
+          "guidelines"
+        ],
+        "title": "GuidedSummaryData"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "InformationGap": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "A detailed description of the information gap"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description"
+        ],
+        "title": "InformationGap"
+      },
+      "InvestigativeQuestionSet-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INVESTIGATIVE_QUESTION_SET"
+            ],
+            "const": "INVESTIGATIVE_QUESTION_SET",
+            "title": "Type",
+            "default": "INVESTIGATIVE_QUESTION_SET"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Input"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "$ref": "#/components/schemas/InvestigativeQuestionSetData-Input"
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": true
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "data"
+        ],
+        "title": "InvestigativeQuestionSet"
+      },
+      "InvestigativeQuestionSet-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INVESTIGATIVE_QUESTION_SET"
+            ],
+            "const": "INVESTIGATIVE_QUESTION_SET",
+            "title": "Type",
+            "default": "INVESTIGATIVE_QUESTION_SET"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Output"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "$ref": "#/components/schemas/InvestigativeQuestionSetData-Output"
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": true
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "data"
+        ],
+        "title": "InvestigativeQuestionSet"
+      },
+      "InvestigativeQuestionSetData-Input": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "trigger_conditions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Trigger Conditions",
+            "default": []
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__nodes__investigative_question_set__Question-Input"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          },
+          "resolution_criteria": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Resolution Criteria",
+            "default": []
+          },
+          "positive_example": {
+            "type": "string",
+            "title": "Positive Example"
+          },
+          "negative_example": {
+            "type": "string",
+            "title": "Negative Example"
+          },
+          "information_gaps": {
+            "items": {
+              "$ref": "#/components/schemas/InformationGap"
+            },
+            "type": "array",
+            "title": "Information Gaps",
+            "description": "The list of critical information gaps that were identified",
+            "default": []
+          },
+          "risk_implications": {
+            "items": {
+              "$ref": "#/components/schemas/RiskImplication"
+            },
+            "type": "array",
+            "title": "Risk Implications",
+            "description": "The list of risk implications of the information gaps that were identified",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "positive_example",
+          "negative_example"
+        ],
+        "title": "InvestigativeQuestionSetData"
+      },
+      "InvestigativeQuestionSetData-Output": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "trigger_conditions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Trigger Conditions",
+            "default": []
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__nodes__investigative_question_set__Question-Output"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          },
+          "resolution_criteria": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Resolution Criteria",
+            "default": []
+          },
+          "positive_example": {
+            "type": "string",
+            "title": "Positive Example"
+          },
+          "negative_example": {
+            "type": "string",
+            "title": "Negative Example"
+          },
+          "information_gaps": {
+            "items": {
+              "$ref": "#/components/schemas/InformationGap"
+            },
+            "type": "array",
+            "title": "Information Gaps",
+            "description": "The list of critical information gaps that were identified",
+            "default": []
+          },
+          "risk_implications": {
+            "items": {
+              "$ref": "#/components/schemas/RiskImplication"
+            },
+            "type": "array",
+            "title": "Risk Implications",
+            "description": "The list of risk implications of the information gaps that were identified",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "positive_example",
+          "negative_example"
+        ],
+        "title": "InvestigativeQuestionSetData"
+      },
+      "KeyMetric": {
+        "properties": {
+          "metric": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Metric",
+            "description": "The metric name.",
+            "examples": [
+              "Revenue",
+              "Market share",
+              "Customer satisfaction"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Value",
+            "description": "The metric value.",
+            "examples": [
+              "100M",
+              "23%",
+              "€1.74M (2023, +79.5% YoY)"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "metric",
+          "value"
+        ],
+        "title": "KeyMetric"
+      },
+      "NodeMetadata": {
+        "properties": {
+          "level": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Level"
+          },
+          "is_computed": {
+            "type": "boolean",
+            "title": "Is Computed",
+            "default": false
+          },
+          "is_optional": {
+            "type": "boolean",
+            "title": "Is Optional",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "NodeMetadata"
+      },
+      "Plan-Input": {
+        "properties": {
+          "_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": " Id"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "nodes": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/GroundedSummarisation-Input"
+                },
+                {
+                  "$ref": "#/components/schemas/QuestionSet-Input"
+                },
+                {
+                  "$ref": "#/components/schemas/QuestionConsolidation-Input"
+                },
+                {
+                  "$ref": "#/components/schemas/InvestigativeQuestionSet-Input"
+                },
+                {
+                  "$ref": "#/components/schemas/ReportSummary-Input"
+                },
+                {
+                  "$ref": "#/components/schemas/DeliberationReport-Input"
+                },
+                {
+                  "$ref": "#/components/schemas/GuidedSummary-Input"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Nodes",
+            "default": []
+          },
+          "edges": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ConditionalInvestigation-Input"
+                },
+                {
+                  "$ref": "#/components/schemas/SimpleEdge"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Edges",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "Plan",
+        "description": "A plan is basically a flat representation of nodes"
+      },
+      "Plan-Output": {
+        "properties": {
+          "_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": " Id"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "nodes": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/GroundedSummarisation-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/QuestionSet-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/QuestionConsolidation-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/InvestigativeQuestionSet-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/ReportSummary-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/DeliberationReport-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/GuidedSummary-Output"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Nodes",
+            "default": []
+          },
+          "edges": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ConditionalInvestigation-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/SimpleEdge"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Edges",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "Plan",
+        "description": "A plan is basically a flat representation of nodes"
+      },
+      "PrimaryFindings": {
+        "properties": {
+          "main_observations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Main Observations",
+            "description": "Key observations extracted from the answers"
+          },
+          "trends_patterns": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Trends Patterns",
+            "description": "Significant trends or patterns identified"
+          }
+        },
+        "type": "object",
+        "required": [
+          "main_observations",
+          "trends_patterns"
+        ],
+        "title": "PrimaryFindings"
+      },
+      "Process-Input": {
+        "properties": {
+          "_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": " Id"
+          },
+          "company_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company Name"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "files": {
+            "items": {
+              "$ref": "#/components/schemas/File"
+            },
+            "type": "array",
+            "title": "Files",
+            "default": []
+          },
+          "metadata": {
+            "type": "object",
+            "title": "Metadata",
+            "default": {
+
+            }
+          }
+        },
+        "type": "object",
+        "title": "Process"
+      },
+      "Process-Output": {
+        "properties": {
+          "_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": " Id"
+          },
+          "company_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company Name"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "files": {
+            "items": {
+              "$ref": "#/components/schemas/File"
+            },
+            "type": "array",
+            "title": "Files",
+            "default": []
+          },
+          "metadata": {
+            "type": "object",
+            "title": "Metadata",
+            "default": {
+
+            }
+          }
+        },
+        "type": "object",
+        "title": "Process"
+      },
+      "Query": {
+        "properties": {
+          "process": {
+            "$ref": "#/components/schemas/Process-Input"
+          },
+          "files": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Files"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "process",
+          "files",
+          "message"
+        ],
+        "title": "Query"
+      },
+      "QuestionConsolidation-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "QUESTION_CONSOLIDATION"
+            ],
+            "const": "QUESTION_CONSOLIDATION",
+            "title": "Type",
+            "default": "QUESTION_CONSOLIDATION"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Input"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QuestionConsolidationData-Input"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "QuestionConsolidation"
+      },
+      "QuestionConsolidation-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "QUESTION_CONSOLIDATION"
+            ],
+            "const": "QUESTION_CONSOLIDATION",
+            "title": "Type",
+            "default": "QUESTION_CONSOLIDATION"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Output"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QuestionConsolidationData-Output"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "QuestionConsolidation"
+      },
+      "QuestionConsolidationData-Input": {
+        "properties": {
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__nodes__question_consolidation__Question-Input"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "QuestionConsolidationData"
+      },
+      "QuestionConsolidationData-Output": {
+        "properties": {
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__nodes__question_consolidation__Question-Output"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "QuestionConsolidationData"
+      },
+      "QuestionSet-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "QUESTION_SET"
+            ],
+            "const": "QUESTION_SET",
+            "title": "Type",
+            "default": "QUESTION_SET"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Input"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "$ref": "#/components/schemas/QuestionSetData-Input"
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "data"
+        ],
+        "title": "QuestionSet"
+      },
+      "QuestionSet-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "QUESTION_SET"
+            ],
+            "const": "QUESTION_SET",
+            "title": "Type",
+            "default": "QUESTION_SET"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Output"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "$ref": "#/components/schemas/QuestionSetData-Output"
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "data"
+        ],
+        "title": "QuestionSet"
+      },
+      "QuestionSetData-Input": {
+        "properties": {
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__nodes__question_set__Question-Input"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "QuestionSetData"
+      },
+      "QuestionSetData-Output": {
+        "properties": {
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__nodes__question_set__Question-Output"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "QuestionSetData"
+      },
+      "Reference": {
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "title": "Document Id",
+            "description": "The original document ID that was used to answer the question"
+          },
+          "document_filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Filename",
+            "description": "The filename of the original document that was used to answer the question"
+          },
+          "pages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Pages",
+            "description": "The pages of the original document that were used to answer the question, if relevant",
+            "default": []
+          },
+          "sections": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Sections",
+            "description": "The sections of the original document that were used to answer the question, if relevant",
+            "default": []
+          },
+          "quotes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Quotes",
+            "description": "Relevant quotes from the original document",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "document_id"
+        ],
+        "title": "Reference"
+      },
+      "ReportSummary-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "REPORT_SUMMARY"
+            ],
+            "const": "REPORT_SUMMARY",
+            "title": "Type",
+            "default": "REPORT_SUMMARY"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Input"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReportSummaryData-Input"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "ReportSummary"
+      },
+      "ReportSummary-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "REPORT_SUMMARY"
+            ],
+            "const": "REPORT_SUMMARY",
+            "title": "Type",
+            "default": "REPORT_SUMMARY"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Sources",
+            "default": []
+          },
+          "control": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Control"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/TaskRequest-Output"
+            },
+            "type": "array",
+            "title": "Tasks",
+            "default": []
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReportSummaryData-Output"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "children": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NodeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "ReportSummary"
+      },
+      "ReportSummaryData-Input": {
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/src__models__core__pathway__nodes__report_summary__Summary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "summary"
+        ],
+        "title": "ReportSummaryData"
+      },
+      "ReportSummaryData-Output": {
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/src__models__core__pathway__nodes__report_summary__Summary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "summary"
+        ],
+        "title": "ReportSummaryData"
+      },
+      "RiskImplication": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "A detailed description of the risk implication"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description"
+        ],
+        "title": "RiskImplication"
+      },
+      "Series": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the data series"
+          },
+          "y_values": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Y Values",
+            "description": "List of y-axis values"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "y_values"
+        ],
+        "title": "Series"
+      },
+      "SimpleEdge": {
+        "properties": {
+          "src": {
+            "type": "string",
+            "title": "Src"
+          },
+          "dst": {
+            "type": "string",
+            "title": "Dst"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SIMPLE_EDGE"
+            ],
+            "const": "SIMPLE_EDGE",
+            "title": "Type",
+            "default": "SIMPLE_EDGE"
+          },
+          "data": {
+            "anyOf": [
+              {
+
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EdgeMetadata"
+              }
+            ],
+            "default": {
+              "is_computed": false,
+              "is_optional": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "src",
+          "dst"
+        ],
+        "title": "SimpleEdge"
+      },
+      "Source": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "subtype": {
+            "type": "string",
+            "title": "Subtype"
+          },
+          "sections": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Sections",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "subtype"
+        ],
+        "title": "Source"
+      },
+      "SummaryGuidelines": {
+        "properties": {
+          "content_requirements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Content Requirements",
+            "description": "The content requirements for the summary.",
+            "default": []
+          },
+          "style_guidelines": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Style Guidelines",
+            "description": "The style guidelines for the summary.",
+            "default": []
+          },
+          "best_practices_examples": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Best Practices Examples",
+            "description": "Best practices examples of a good summary",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "SummaryGuidelines"
+      },
+      "SupportingEvidence": {
+        "properties": {
+          "key_data_points": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Key Data Points",
+            "description": "List of key data points referenced in analysis",
+            "default": []
+          },
+          "verification_methods": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Verification Methods",
+            "description": "Methods used to verify the data and conclusions",
+            "default": []
+          },
+          "additional_context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Context",
+            "description": "Any additional context or notes"
+          }
+        },
+        "type": "object",
+        "title": "SupportingEvidence",
+        "description": "Contains additional context and verification details"
+      },
+      "TaskRequest-Input": {
+        "properties": {
+          "task": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CreditReportVisualisation-Input"
+              }
+            ],
+            "title": "Task",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "CREDIT_REPORT_VISUALISATION": "#/components/schemas/CreditReportVisualisation-Input"
+              }
+            }
+          },
+          "data": {
+            "anyOf": [
+              {
+
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task"
+        ],
+        "title": "TaskRequest"
+      },
+      "TaskRequest-Output": {
+        "properties": {
+          "task": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CreditReportVisualisation-Output"
+              }
+            ],
+            "title": "Task",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "CREDIT_REPORT_VISUALISATION": "#/components/schemas/CreditReportVisualisation-Output"
+              }
+            }
+          },
+          "data": {
+            "anyOf": [
+              {
+
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task"
+        ],
+        "title": "TaskRequest"
+      },
+      "Token": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "token_type"
+        ],
+        "title": "Token"
+      },
+      "TriggerDecision": {
+        "properties": {
+          "trigger_evaluations": {
+            "items": {
+              "$ref": "#/components/schemas/TriggerEvaluation"
+            },
+            "type": "array",
+            "title": "Trigger Evaluations",
+            "description": "List of all trigger evaluations",
+            "default": []
+          },
+          "supporting_evidence": {
+            "items": {
+              "$ref": "#/components/schemas/SupportingEvidence"
+            },
+            "type": "array",
+            "title": "Supporting Evidence",
+            "description": "Supporting analysis and context",
+            "default": []
+          },
+          "justification": {
+            "type": "string",
+            "title": "Justification",
+            "description": "Detailed justification for the decision",
+            "default": ""
+          },
+          "trigger_decision": {
+            "type": "boolean",
+            "title": "Trigger Decision",
+            "description": "Whether deeper analysis is warranted",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "TriggerDecision"
+      },
+      "TriggerEvaluation": {
+        "properties": {
+          "trigger_name": {
+            "type": "string",
+            "title": "Trigger Name",
+            "description": "Name or description of the trigger being evaluated"
+          },
+          "evidence": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence",
+            "description": "List of evidence points considered for this trigger",
+            "default": []
+          },
+          "is_triggered": {
+            "type": "boolean",
+            "title": "Is Triggered",
+            "description": "Whether the trigger condition was met",
+            "default": false
+          },
+          "confidence_level": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "title": "Confidence Level",
+            "description": "Confidence level from 0 to 1",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "trigger_name"
+        ],
+        "title": "TriggerEvaluation",
+        "description": "Represents the evaluation of a single trigger condition"
+      },
+      "User": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "full_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Full Name"
+          },
+          "disabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disabled"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username"
+        ],
+        "title": "User"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "Visualisation-Input": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "Title of the visualisation"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the visualisation"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LINE_PLOT"
+            ],
+            "const": "LINE_PLOT",
+            "title": "Type",
+            "description": "Type of visualization",
+            "default": "LINE_PLOT"
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VisualisationData"
+              }
+            ],
+            "description": "The actual plot data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "data"
+        ],
+        "title": "Visualisation"
+      },
+      "Visualisation-Output": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "Title of the visualisation"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the visualisation"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LINE_PLOT"
+            ],
+            "const": "LINE_PLOT",
+            "title": "Type",
+            "description": "Type of visualization",
+            "default": "LINE_PLOT"
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VisualisationData"
+              }
+            ],
+            "description": "The actual plot data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "data"
+        ],
+        "title": "Visualisation"
+      },
+      "VisualisationData": {
+        "properties": {
+          "x_values": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "X Values",
+            "description": "List of x-axis values"
+          },
+          "series": {
+            "items": {
+              "$ref": "#/components/schemas/Series"
+            },
+            "type": "array",
+            "title": "Series",
+            "description": "List of data series to plot"
+          }
+        },
+        "type": "object",
+        "required": [
+          "x_values",
+          "series"
+        ],
+        "title": "VisualisationData"
+      },
+      "src__models__core__pathway__edges__conditional_investigation__Question": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "additional_considerations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Considerations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "question"
+        ],
+        "title": "Question"
+      },
+      "src__models__core__pathway__nodes__deliberation_report__SectionSummary": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "description": "The title of the section. Must be between 1 and 200 characters.",
+            "examples": [
+              "Financial Performance",
+              "Market Analysis"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 50,
+            "title": "Summary",
+            "description": "A comprehensive summary of the section's content. Should be between 50 and 2000 characters.",
+            "examples": [
+              "The company showed strong financial performance in Q4 2023, with revenue growing 15% YoY..."
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "summary"
+        ],
+        "title": "SectionSummary",
+        "description": "Represents a summary of a specific section within a report."
+      },
+      "src__models__core__pathway__nodes__deliberation_report__Summary": {
+        "properties": {
+          "company_overview": {
+            "type": "string",
+            "maxLength": 3000,
+            "minLength": 100,
+            "title": "Company Overview",
+            "description": "A detailed overview of the company, including its business model, market position, and current status.",
+            "examples": [
+              "XYZ Corp is a leading technology company specializing in cloud computing solutions..."
+            ]
+          },
+          "key_metrics": {
+            "items": {
+              "$ref": "#/components/schemas/KeyMetric"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Key Metrics",
+            "description": "A list of 1-10 crucial quantitative and qualitative metrics highlighted in the report.",
+            "examples": [
+              [
+                "Revenue growth: 15% YoY",
+                "Market share: 23%",
+                "Customer satisfaction: 4.8/5"
+              ]
+            ]
+          },
+          "key_strengths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Key Strengths",
+            "description": "A list of 1-10 major competitive advantages or positive aspects identified in the report.",
+            "examples": [
+              [
+                "Strong market position",
+                "Innovative product pipeline",
+                "Robust financial health"
+              ]
+            ]
+          },
+          "key_risks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Key Risks",
+            "description": "A list of 1-10 significant risks or challenges faced by the company.",
+            "examples": [
+              [
+                "Increasing competition",
+                "Regulatory changes",
+                "Supply chain vulnerabilities"
+              ]
+            ]
+          },
+          "sections_summary": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__nodes__deliberation_report__SectionSummary"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Sections Summary",
+            "description": "A list of 1-20 detailed summaries for each major section of the report."
+          },
+          "final_summary": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 200,
+            "title": "Final Summary",
+            "description": "A comprehensive conclusion that synthesizes all key findings and provides an overall assessment.",
+            "examples": [
+              "Based on our analysis, XYZ Corp demonstrates strong market positioning with significant growth potential..."
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "company_overview",
+          "key_metrics",
+          "key_strengths",
+          "key_risks",
+          "sections_summary",
+          "final_summary"
+        ],
+        "title": "Summary"
+      },
+      "src__models__core__pathway__nodes__grounded_summarisation__Summary-Input": {
+        "properties": {
+          "category_observations": {
+            "items": {
+              "$ref": "#/components/schemas/CategoryObservation"
+            },
+            "type": "array",
+            "title": "Category Observations",
+            "description": "Observations organized by category",
+            "default": []
+          },
+          "final_summary": {
+            "type": "string",
+            "title": "Final Summary",
+            "description": "Final summary consolidating the most important findings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "final_summary"
+        ],
+        "title": "Summary"
+      },
+      "src__models__core__pathway__nodes__grounded_summarisation__Summary-Output": {
+        "properties": {
+          "category_observations": {
+            "items": {
+              "$ref": "#/components/schemas/CategoryObservation"
+            },
+            "type": "array",
+            "title": "Category Observations",
+            "description": "Observations organized by category",
+            "default": []
+          },
+          "final_summary": {
+            "type": "string",
+            "title": "Final Summary",
+            "description": "Final summary consolidating the most important findings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "final_summary"
+        ],
+        "title": "Summary"
+      },
+      "src__models__core__pathway__nodes__guided_summary__Summary": {
+        "properties": {
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary",
+            "description": "A factual presentation of the company's key identifying characteristics, ownership structure, and operational setup with focus on verifiable information.. Should be between 150 and 800 characters."
+          }
+        },
+        "type": "object",
+        "title": "Summary"
+      },
+      "src__models__core__pathway__nodes__investigative_question_set__Answer": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The id of the question"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer",
+            "description": "The answer to the question"
+          },
+          "references": {
+            "items": {
+              "$ref": "#/components/schemas/Reference"
+            },
+            "type": "array",
+            "title": "References",
+            "description": "The references to the sources that were used to answer the question"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "answer",
+          "references"
+        ],
+        "title": "Answer"
+      },
+      "src__models__core__pathway__nodes__investigative_question_set__Question-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "additional_considerations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Considerations"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__investigative_question_set__Answer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "question"
+        ],
+        "title": "Question"
+      },
+      "src__models__core__pathway__nodes__investigative_question_set__Question-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "additional_considerations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Considerations"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__investigative_question_set__Answer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "question"
+        ],
+        "title": "Question"
+      },
+      "src__models__core__pathway__nodes__question_consolidation__Answer": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The id of the question"
+          },
+          "inconsistencies": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Inconsistencies",
+            "description": "The inconsistencies found in the answersj, if any",
+            "default": []
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer",
+            "description": "The answer to the question"
+          },
+          "references": {
+            "items": {
+              "$ref": "#/components/schemas/Reference"
+            },
+            "type": "array",
+            "title": "References",
+            "description": "The references to the sources that were used to answer the question"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "answer",
+          "references"
+        ],
+        "title": "Answer"
+      },
+      "src__models__core__pathway__nodes__question_consolidation__Question-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "additional_considerations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Considerations"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__question_consolidation__Answer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "question"
+        ],
+        "title": "Question"
+      },
+      "src__models__core__pathway__nodes__question_consolidation__Question-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "additional_considerations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Considerations"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__question_consolidation__Answer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "question"
+        ],
+        "title": "Question"
+      },
+      "src__models__core__pathway__nodes__question_set__Answer": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The id of the question"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer",
+            "description": "The answer to the question"
+          },
+          "references": {
+            "items": {
+              "$ref": "#/components/schemas/Reference"
+            },
+            "type": "array",
+            "title": "References",
+            "description": "The references to the sources that were used to answer the question"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "answer",
+          "references"
+        ],
+        "title": "Answer"
+      },
+      "src__models__core__pathway__nodes__question_set__Question-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "additional_considerations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Considerations"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__question_set__Answer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "question"
+        ],
+        "title": "Question"
+      },
+      "src__models__core__pathway__nodes__question_set__Question-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "additional_considerations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Considerations"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/src__models__core__pathway__nodes__question_set__Answer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "question"
+        ],
+        "title": "Question"
+      },
+      "src__models__core__pathway__nodes__report_summary__SectionSummary": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "description": "The title of the section. Must be between 1 and 200 characters.",
+            "examples": [
+              "Financial Performance",
+              "Market Analysis"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 2500,
+            "minLength": 50,
+            "title": "Summary",
+            "description": "A comprehensive summary of the section's content. Should be between 50 and 2000 characters.",
+            "examples": [
+              "The company showed strong financial performance in Q4 2023, with revenue growing 15% YoY..."
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "summary"
+        ],
+        "title": "SectionSummary",
+        "description": "Represents a summary of a specific section within a report."
+      },
+      "src__models__core__pathway__nodes__report_summary__Summary": {
+        "properties": {
+          "company_overview": {
+            "type": "string",
+            "maxLength": 3000,
+            "minLength": 100,
+            "title": "Company Overview",
+            "description": "A detailed overview of the company, including its business model, market position, and current status.",
+            "examples": [
+              "XYZ Corp is a leading technology company specializing in cloud computing solutions..."
+            ]
+          },
+          "key_metrics": {
+            "items": {
+              "$ref": "#/components/schemas/KeyMetric"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Key Metrics",
+            "description": "A list of 1-10 crucial quantitative and qualitative metrics highlighted in the report.",
+            "examples": [
+              [
+                "Revenue growth: 15% YoY",
+                "Market share: 23%",
+                "Customer satisfaction: 4.8/5"
+              ]
+            ]
+          },
+          "key_strengths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Key Strengths",
+            "description": "A list of 1-10 major competitive advantages or positive aspects identified in the report.",
+            "examples": [
+              [
+                "Strong market position",
+                "Innovative product pipeline",
+                "Robust financial health"
+              ]
+            ]
+          },
+          "key_risks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Key Risks",
+            "description": "A list of 1-10 significant risks or challenges faced by the company.",
+            "examples": [
+              [
+                "Increasing competition",
+                "Regulatory changes",
+                "Supply chain vulnerabilities"
+              ]
+            ]
+          },
+          "sections_summary": {
+            "items": {
+              "$ref": "#/components/schemas/src__models__core__pathway__nodes__report_summary__SectionSummary"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Sections Summary",
+            "description": "A list of 1-20 detailed summaries for each major section of the report."
+          },
+          "final_summary": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 200,
+            "title": "Final Summary",
+            "description": "A comprehensive conclusion that synthesizes all key findings and provides an overall assessment.",
+            "examples": [
+              "Based on our analysis, XYZ Corp demonstrates strong market positioning with significant growth potential..."
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "company_overview",
+          "key_metrics",
+          "key_strengths",
+          "key_risks",
+          "sections_summary",
+          "final_summary"
+        ],
+        "title": "Summary"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {
+
+            },
+            "tokenUrl": "token"
+          }
+        }
+      }
+    }
+  }
+}
